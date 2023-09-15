@@ -2,14 +2,20 @@ const express = require('express');
 const routes = require('./routes/api')
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
+require('dotenv').config();
 
 // Setting up express app
 const app = express();
 
 // connect to mongdb
-mongoose.connect('mongodb://localhost/spotsToGo');
-mongoose.Promise = global.Promise;
+async function connectDatabase(){
+    await mongoose.connect(process.env.dbURI)
+    .then
+    console.log("Connected to database successfully")
+};
 
+connectDatabase();
+mongoose.Promise = global.Promise;
 
 app.use(bodyParser.urlencoded({
     extended: true
