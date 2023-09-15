@@ -1,9 +1,15 @@
 const express = require('express');
 const routes = require('./routes/api')
 const bodyParser = require('body-parser');
+const mongoose = require('mongoose');
 
 // Setting up express app
 const app = express();
+
+// connect to mongdb
+mongoose.connect('mongodb://localhost/spotsToGo');
+mongoose.Promise = global.Promise;
+
 
 app.use(bodyParser.urlencoded({
     extended: true
