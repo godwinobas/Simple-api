@@ -21,7 +21,9 @@ router.put('/spots/:id', function(req, res, next){
 
 // delete chilling spot
 router.delete('/spots/:id', function(req, res, next){
-    res.send({type: 'DELETE'});
+    Spot.findByIdAndDelete({_id: req.params.id}).then(function(ninja){
+        res.send(ninja);
+    });
 });
 
 module.exports = router;
