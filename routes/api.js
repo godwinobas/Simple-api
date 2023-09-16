@@ -16,7 +16,12 @@ router.post('/spots', function(req, res, next){
 
 // update existing chilling spot
 router.put('/spots/:id', function(req, res, next){
-    res.send({type: 'PUT'});
+    Spot.findByIdAndUpdate({_id: req.params.id}, req.body)
+    .then(function(ninja){
+        ninja.findOne({_id: req.params.id}).then(function(ninja){
+            res.send(ninja);
+        });
+    })
 });
 
 // delete chilling spot
