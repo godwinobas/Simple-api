@@ -18,7 +18,7 @@ router.post('/spots', function(req, res, next){
 router.put('/spots/:id', function(req, res, next){
     Spot.findByIdAndUpdate({_id: req.params.id}, req.body)
     .then(function(ninja){
-        ninja.findOne({_id: req.params.id}).then(function(ninja){
+        Spot.findById({_id: req.params.id}).then(function(ninja){
             res.send(ninja);
         });
     })
